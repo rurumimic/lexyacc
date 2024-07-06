@@ -34,7 +34,7 @@ hello
 hello
 bye
 bye
-^C
+^D
 ```
 
 ### Build the Project
