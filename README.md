@@ -37,6 +37,19 @@ bye
 ^D
 ```
 
+```bash
+flex ch1-05.l;
+cp lex.yy.c ch1-05l.c;
+
+yacc -d ch1-05.y;
+cp y.tab.c ch1-05y.c;
+cp y.tab.h ch1-05y.h;
+
+gcc -g -c ch1-05l.c -o ch1-05l.o;
+gcc -g -c ch1-05y.c -o ch1-05y.o;
+gcc -g -o ch1-05.pgm ch1-05l.o ch1-05y.o -lfl -ll;
+```
+
 ### Build the Project
 
 Change `-ly -ll` to `-lfl -ll` in the Makefile:
