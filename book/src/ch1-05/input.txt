@@ -1,0 +1,5 @@
+noun cat mouse apple
+verb chases eats
+pron he
+cat chases mouse.
+he eats apple.
