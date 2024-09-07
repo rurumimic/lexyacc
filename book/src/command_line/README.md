@@ -1,5 +1,7 @@
 # Command Line
 
+## Build
+
 ```bash
 make
 ```
