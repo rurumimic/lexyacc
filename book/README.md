@@ -11,6 +11,7 @@
    - [regex](src/regex/README.md)
    - [wordcount](src/wordcount/README.md)
    - [command line](src/command_line/README.md)
+   - [c analyzer](src/c_analyzer/README.md)
 
 ## Clone the Source Code
 

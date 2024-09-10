@@ -1,0 +1,11 @@
+#include <stdio.h> /* header */
+
+/* This is
+ * a main function
+ */
+
+/* return type */ int main() {
+  printf("Hello, World!");
+  return 0;
+}
+
