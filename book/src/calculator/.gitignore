@@ -1,0 +1,7 @@
+*.c
+*.h
+*.o
+*.pgm
+
+!calculator.h
+

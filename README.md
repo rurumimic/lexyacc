@@ -8,6 +8,7 @@
 
 - [lex & yacc, 2nd](book/README.md)
   - [src](book/src)
+- compilers: principles, techniques, and tool
 
 ## Packages
 

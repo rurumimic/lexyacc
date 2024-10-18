@@ -12,6 +12,8 @@
    - [wordcount](src/wordcount/README.md)
    - [command line](src/command_line/README.md)
    - [c analyzer](src/c_analyzer/README.md)
+3. yacc
+  - [calculator](src/calculator/README.md)
 
 ## Clone the Source Code
 
