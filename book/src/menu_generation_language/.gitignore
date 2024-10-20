@@ -1,0 +1,9 @@
+*.c
+*.h
+*.o
+*.pgm
+
+!mgl.h
+!mgl.c
+!mgl-code.c
+
