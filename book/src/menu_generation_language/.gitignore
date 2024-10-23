@@ -3,7 +3,9 @@
 *.o
 *.pgm
 
-!mgl.h
-!mgl.c
-!mgl-code.c
+!mglyac.h
+!subr.h
+!subr.c
+!mmain.c
+!mgl-input
 

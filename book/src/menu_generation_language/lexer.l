@@ -1,7 +1,7 @@
 %{
 
-#include "parser.h" // <- #include "y.tab.h"
-#include "mgl.h"
+// #include "parser.h" // <- #include "y.tab.h"
+#include "mglyac.h"
 
 %}
 
