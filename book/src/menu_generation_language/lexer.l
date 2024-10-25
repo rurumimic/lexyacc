@@ -1,6 +1,6 @@
 %{
 
-// #include "parser.h" // <- #include "y.tab.h"
+#include "parser.h" // <- #include "y.tab.h"
 #include "mglyac.h"
 
 %}
