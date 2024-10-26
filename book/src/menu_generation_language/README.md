@@ -3,43 +3,23 @@
 ## Build
 
 ```bash
-cd first_version
+make clean
 make
 ```
 
-## Run
+### Manual Build
 
 ```bash
+make build
 ./mgl.pgm mgl-input
-```
-
-### screen.out
-
-```bash
-cp screen.out first.c
-```
-
-Add main:
-
-```bash
-tee -a first.c <<EOF
-
-void main() {
-  menu_second();
-  menu_cleanup();
-}
-
-EOF
-```
-
-```bash
-gcc -o first.pgm first.c -lcurses -ltermcap
+cat example_main.c >> menu.c
+gcc -o menu.pgm menu.c -lcurses -ltermcap
 ```
 
 ### Run Menu
 
 ```bash
-./first
+./menu.pgm
 ```
 
 ```bash

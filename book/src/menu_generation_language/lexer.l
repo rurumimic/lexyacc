@@ -24,7 +24,7 @@ nl      \n
               return QSTRING;
             }
           }
-screen    { return SCREEN; }
+screen    { return MGL_SCREEN; }
 title     { return TITLE; }
 item      { return ITEM; }
 command   { return COMMAND; }
@@ -56,7 +56,7 @@ static struct keyword {
   char *name;
   int value; // token value
 } keywords[] = {
-  { "screen", SCREEN },
+  { "screen", MGL_SCREEN },
   { "title", TITLE },
   { "item", ITEM },
   { "command", COMMAND },

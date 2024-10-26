@@ -205,7 +205,9 @@ void dump_data(char **array) {
  * this routine writes out the run-time support
  */
 
-void end_file() { dump_data(menu_runtime); }
+void end_file() { 
+  dump_data(menu_runtime);
+}
 
 /*
  * Check a name to see if it has already been used.  If
@@ -265,18 +267,22 @@ char *screen_init[] = {
 	"\tint (*act_menu)();   /* call appropriate function */",
 	"\tint  attribute;",
 	"};\n",
+	"\n",
+	"int menu_runtime(struct item *items);\n",
+	"int casecmp(char *p, char *q);\n",
+	"int main();\n",
 	0,
 };
 
 char *menu_init[] = {
-	"menu_init()",
+	"void menu_init()",
 	"{",
 	"\tvoid menu_cleanup();\n",
 	"\tsignal(SIGINT, menu_cleanup);",
 	"\tinitscr();",
 	"\tcrmode();",
 	"}\n\n",
-	"menu_cleanup()",
+	"void menu_cleanup()",
 	"{",
 	"\tmvcur(0, COLS - 1, LINES - 1, 0);",
 	"\tendwin();",
@@ -287,7 +293,7 @@ char *menu_init[] = {
 char *menu_runtime[] = {
 "/* runtime */",
 "",
-"menu_runtime(items)",
+"int menu_runtime(items)",
 "struct item *items;",
 "{",
 "\tint visible = 0;",
@@ -308,7 +314,7 @@ char *menu_runtime[] = {
 "",
 "\tfor(;;)",
 "\t{",
-"\t\tif (quit) return;",
+"\t\tif (quit) return 0;",
 "\t\tint i, nval;",
 "",
 "\t\tgetstr(buf);",
@@ -341,7 +347,9 @@ char *menu_runtime[] = {
 "\t\t\tbreak;",
 "\t\tcase EXECUTE:",
 "\t\t\trefresh();",
+"\t\t\tendwin();",
 "\t\t\tsystem(ptr->act_str);",
+"\t\t\trefresh();",
 "\t\t\tbreak;",
 "\t\tcase MENU:",
 "\t\t\trefresh();",
@@ -356,7 +364,7 @@ char *menu_runtime[] = {
 "\t}",
 "}",
 "",
-"casecmp(char *p, char *q)",
+"int casecmp(char *p, char *q)",
 "{",
 "\tint pc, qc;",
 "",
@@ -368,7 +376,7 @@ char *menu_runtime[] = {
 "\t\t\tbreak;",
 "\t}",
 "\treturn pc-qc;",
-"}",
+"}\n",
 0
 };
 
