@@ -25,6 +25,8 @@
 #include "mglyac.h"
 #include "subr.h"
 
+int yydebug = 1;
+
 char *progname = "mgl.pgm";
 char *usage = "%s: usage [infile] [outfile]\n";
 
@@ -36,13 +38,13 @@ int lineno = 1;
 #endif
 #ifndef YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
-#line 13 "parser.y"
+#line 15 "parser.y"
 typedef union YYSTYPE {
   char *string; /* string buffer */
   int cmd;      /* command value */
 } YYSTYPE;
 #endif /* !YYSTYPE_IS_DECLARED */
-#line 46 "y.tab.c"
+#line 48 "y.tab.c"
 
 /* compatibility with bison */
 #ifdef YYPARSE_PARAM
@@ -422,7 +424,7 @@ static YYINT  *yylexp = 0;
 
 static YYINT  *yylexemes = 0;
 #endif /* YYBTYACC */
-#line 109 "parser.y"
+#line 112 "parser.y"
 
 int main(int argc, char **argv) {
   char *outfile;
@@ -482,9 +484,9 @@ void warning(char *s, char *t) {
 }
 
 void yyerror(char const *s) {
-  fprintf(stderr, "%s\n", s);
+  fprintf(stderr, "%s at line %d\n", s, lineno);
 }
-#line 488 "y.tab.c"
+#line 490 "y.tab.c"
 
 /* For use in generated program */
 #define yydepth (int)(yystack.s_mark - yystack.s_base)
@@ -1155,59 +1157,59 @@ yyreduce:
     switch (yyn)
     {
 case 5:
-#line 36 "parser.y"
+#line 38 "parser.y"
 	{ start_screen(yystack.l_mark[0].string); }
-#line 1161 "y.tab.c"
+#line 1163 "y.tab.c"
 break;
 case 6:
-#line 37 "parser.y"
+#line 39 "parser.y"
 	{ start_screen(strdup("default")); }
-#line 1166 "y.tab.c"
+#line 1168 "y.tab.c"
 break;
 case 7:
-#line 40 "parser.y"
+#line 42 "parser.y"
 	{ end_screen(yystack.l_mark[0].string); }
-#line 1171 "y.tab.c"
+#line 1173 "y.tab.c"
 break;
 case 8:
-#line 41 "parser.y"
+#line 43 "parser.y"
 	{ end_screen(strdup("default")); }
-#line 1176 "y.tab.c"
+#line 1178 "y.tab.c"
 break;
 case 12:
-#line 51 "parser.y"
+#line 53 "parser.y"
 	{ add_title(yystack.l_mark[0].string); }
-#line 1181 "y.tab.c"
+#line 1183 "y.tab.c"
 break;
 case 15:
-#line 59 "parser.y"
+#line 61 "parser.y"
 	{
         item_str = yystack.l_mark[-4].string;
         add_line(yystack.l_mark[-1].cmd, yystack.l_mark[0].cmd);
         yyval.cmd = ITEM;
       }
-#line 1190 "y.tab.c"
+#line 1192 "y.tab.c"
 break;
 case 16:
-#line 66 "parser.y"
+#line 68 "parser.y"
 	{ cmd_str = strdup(""); }
-#line 1195 "y.tab.c"
+#line 1197 "y.tab.c"
 break;
 case 17:
-#line 67 "parser.y"
+#line 69 "parser.y"
 	{ cmd_str = yystack.l_mark[0].string; }
-#line 1200 "y.tab.c"
+#line 1202 "y.tab.c"
 break;
 case 18:
-#line 71 "parser.y"
+#line 73 "parser.y"
 	{
           act_str = yystack.l_mark[0].string;
           yyval.cmd = EXECUTE;
         }
-#line 1208 "y.tab.c"
+#line 1210 "y.tab.c"
 break;
 case 19:
-#line 76 "parser.y"
+#line 78 "parser.y"
 	{ /* make "menu_" $2 */
           act_str = malloc(strlen(yystack.l_mark[0].string) + 6);
           strcpy(act_str, "menu_");
@@ -1215,60 +1217,60 @@ case 19:
           free(yystack.l_mark[0].string);
           yyval.cmd = MENU;
         }
-#line 1219 "y.tab.c"
+#line 1221 "y.tab.c"
 break;
 case 20:
-#line 83 "parser.y"
+#line 85 "parser.y"
 	{ yyval.cmd = QUIT; }
-#line 1224 "y.tab.c"
+#line 1226 "y.tab.c"
 break;
 case 21:
-#line 84 "parser.y"
+#line 86 "parser.y"
 	{ yyval.cmd = IGNORE; }
-#line 1229 "y.tab.c"
+#line 1231 "y.tab.c"
 break;
 case 22:
-#line 87 "parser.y"
+#line 89 "parser.y"
 	{ yyval.cmd = VISIBLE; }
-#line 1234 "y.tab.c"
+#line 1236 "y.tab.c"
 break;
 case 23:
-#line 88 "parser.y"
+#line 90 "parser.y"
 	{ yyval.cmd = VISIBLE; }
-#line 1239 "y.tab.c"
+#line 1241 "y.tab.c"
 break;
 case 24:
-#line 89 "parser.y"
+#line 91 "parser.y"
 	{ yyval.cmd = INVISIBLE; }
-#line 1244 "y.tab.c"
+#line 1246 "y.tab.c"
 break;
 case 25:
-#line 92 "parser.y"
+#line 94 "parser.y"
 	{ yyval.string = yystack.l_mark[0].string; }
-#line 1249 "y.tab.c"
+#line 1251 "y.tab.c"
 break;
 case 26:
-#line 94 "parser.y"
+#line 96 "parser.y"
 	{
       warning("String literal inappropriate", (char *)0);
       yyval.string = yystack.l_mark[0].string; /* but use it anyway */
     }
-#line 1257 "y.tab.c"
+#line 1259 "y.tab.c"
 break;
 case 27:
-#line 100 "parser.y"
+#line 103 "parser.y"
 	{ yyval.string = yystack.l_mark[0].string; }
-#line 1262 "y.tab.c"
+#line 1264 "y.tab.c"
 break;
 case 28:
-#line 102 "parser.y"
+#line 105 "parser.y"
 	{
             warning("Non-string literal inappropriate", (char *)0);
             yyval.string = yystack.l_mark[0].string; /* but use it anyway */
          }
-#line 1270 "y.tab.c"
-break;
 #line 1272 "y.tab.c"
+break;
+#line 1274 "y.tab.c"
     default:
         break;
     }

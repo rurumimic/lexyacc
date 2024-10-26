@@ -3,6 +3,8 @@
 #include "mglyac.h"
 #include "subr.h"
 
+int yydebug = 1;
+
 char *progname = "mgl.pgm";
 char *usage = "%s: usage [infile] [outfile]\n";
 
@@ -95,6 +97,7 @@ id: ID { $$ = $1; }
       warning("String literal inappropriate", (char *)0);
       $$ = $1; /* but use it anyway */
     }
+
   ;
 
 qstring: QSTRING { $$ = $1; }
@@ -165,5 +168,5 @@ void warning(char *s, char *t) {
 }
 
 void yyerror(char const *s) {
-  fprintf(stderr, "%s\n", s);
+  fprintf(stderr, "%s at line %d\n", s, lineno);
 }

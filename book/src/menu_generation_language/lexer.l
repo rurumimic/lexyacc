@@ -37,7 +37,7 @@ attribute { return ATTRIBUTE; }
 visible   { return VISIBLE; }
 invisible { return INVISIBLE; }
 end       { return END; }
-id        {
+{id}      {
             // if (yylval.cmd = keyword(yytext)) {
             //  return yylval.cmd;
             // }

@@ -3,13 +3,8 @@
 *.o
 *.pgm
 
-!lexer.c
-!parser.c
-!parser.h
 !mglyac.h
-!mglyac.c
 !subr.h
 !subr.c
-!mmain.c
 !mgl-input
 
