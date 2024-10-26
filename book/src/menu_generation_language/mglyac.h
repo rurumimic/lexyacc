@@ -14,7 +14,7 @@ extern int lineno;
 
 void yyerror(char const *s);
 
-int main(int argc, char **argv);
+// int main(int argc, char **argv);
 void warning(char *s, char *t);
 
 #endif // MGL_H
