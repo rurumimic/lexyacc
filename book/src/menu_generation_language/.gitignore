@@ -7,6 +7,6 @@
 !subr.h
 !subr.c
 !mgl-input
-!menu.c
+#!menu.c
 !example_main.c
 
