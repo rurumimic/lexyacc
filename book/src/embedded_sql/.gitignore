@@ -1,0 +1,10 @@
+*.c
+*.h
+*.o
+*.output
+*.pgm
+!sql.h
+!sql.c
+!embedded.sql
+!embedded.c
+
