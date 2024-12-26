@@ -7,6 +7,6 @@
 extern int lineno;
 
 void yyerror(char const *s);
-// int yylex(void);
+int yylex(void);
 
 #endif // SQL_H

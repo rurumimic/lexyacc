@@ -14,10 +14,15 @@ lexer: lexer.l parser.h
 	cp lex.yy.c lexer.c
 
 build_pgm: lexer.c parser.c
-	gcc -g -c parser.c
-	gcc -g -c lexer.c
-	gcc -g -o sql.pgm lexer.o parser.o -ll -lfl -lc
-	# gcc -g -o sql.pgm lexer.c parser.c -I. -ll -lfl -lc
+	# separate compilation:
+	# gcc -g -c parser.c
+	# gcc -g -c lexer.c
+	# gcc -g -o sql.pgm lexer.o parser.o -ll -lfl -lc
+	# or use: -ll (instead of -ly)
+	# gcc -g -o sql.pgm lexer.c parser.c -ll -lfl -lc
+	# or use: -ly (instead of -ll)
+	gcc -g -o sql.pgm lexer.c parser.c -ly -lfl -lc
+	# -ly is for yacc
 	# -ll is for yacc
 	# -lfl is for flex
 	# -lc is for stdio.h
