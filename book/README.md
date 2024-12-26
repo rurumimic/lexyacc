@@ -16,8 +16,8 @@
    - [calculator](src/calculator/README.md)
 4. [menu generation language](src/menu_generation_language/README.md)
 5. sql
-  - [sql](src/sql/README.md)
-  - [embedded sql](src/embedded_sql/README.md)
+   - [sql](src/sql/README.md)
+   - [embedded sql](src/embedded_sql/README.md)
 
 ## Clone the Source Code
 
