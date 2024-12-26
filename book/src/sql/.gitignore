@@ -1,0 +1,7 @@
+*.c
+*.h
+*.o
+*.output
+*.pgm
+!sql.h
+

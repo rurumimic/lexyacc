@@ -15,6 +15,7 @@
 3. yacc
    - [calculator](src/calculator/README.md)
 4. [menu generation language](src/menu_generation_language/README.md)
+5. [sql](src/sql/README.md)
 
 ## Clone the Source Code
 
@@ -62,5 +63,34 @@ Build:
 
 ```bash
 make
+```
+
+---
+
+## Tip
+
+### Debugging
+
+```bash
+yacc -v -d parser.y
+
+yacc: 1 rule never reduced
+yacc: 1 shift/reduce conflict, 20 reduce/reduce conflicts.
+```
+
+Open `y.output` to see the conflicts:
+
+```bash
+188: shift/reduce conflict (shift 190, reduce 157) on UNION
+state 188
+	query_exp : query_exp . UNION query_term  (154)
+	query_exp : query_exp . UNION ALL query_term  (155)
+	query_term : '(' query_exp .  (157)
+
+	UNION  shift 190
+	DECLARE  reduce 157
+	ORDER  reduce 157
+	PROCEDURE  reduce 157
+	';'  reduce 157
 ```
 
