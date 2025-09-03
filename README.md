@@ -32,3 +32,9 @@
 sudo apt install yacc flex
 ```
 
+---
+
+## Source
+
+- [ShrimpQL](src/shrimpql/README.md)
+
