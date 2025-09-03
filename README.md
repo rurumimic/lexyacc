@@ -1,16 +1,31 @@
 # lex & yacc
 
-## Docs
+## Rust Lexer and Parser
+
+### Packages
+
+- github: [logos](https://github.com/maciejhirsz/logos), [handbook](https://logos.maciej.codes/)
+- github: [lalrpop](https://github.com/lalrpop/lalrpop), [tutorial](https://lalrpop.github.io/lalrpop/)
+
+### Projects
+
+- [ShrimpQL](src/shrimpql/README.md)
+
+---
+
+## Classic Lexer and Parser
+
+### Docs
 
 - bison: [manual](https://www.gnu.org/software/bison/manual/bison.html)
 
-## Book
+### Book
 
 - [lex & yacc, 2nd](book/README.md)
   - [src](book/src)
 - compilers: principles, techniques, and tool
 
-### Lex & Yacc, 2nd
+#### Lex & Yacc, 2nd
 
 1. lex & yacc
    - [grammar](book/src/grammar/README.md)
@@ -26,15 +41,9 @@
    - [sql](book/src/sql/README.md)
    - [embedded sql](book/src/embedded_sql/README.md)
 
-## Packages
+### Packages
 
 ```bash
 sudo apt install yacc flex
 ```
-
----
-
-## Source
-
-- [ShrimpQL](src/shrimpql/README.md)
 
