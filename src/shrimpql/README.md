@@ -34,6 +34,5 @@ pub mod parser;
 ```rust
 use lalrpop_util::lalrpop_mod;
 
-lalrpop_mod!(pub calculator, "/parser/calculator.rs");
+lalrpop_mod!(pub calculator, "/parser/sql.rs");
 ```
-

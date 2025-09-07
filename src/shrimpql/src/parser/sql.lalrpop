@@ -1,0 +1,102 @@
+use crate::parser::ast;
+use crate::lexer::tokens::{Token, LexicalError};
+
+grammar;
+
+extern {
+  type Location = usize;
+  type Error = LexicalError;
+
+  enum Token {
+    "SELECT" => Token::KeywordSelect,
+    "FROM" => Token::KeywordFrom,
+    "WHERE" => Token::KeywordWhere,
+    "AS" => Token::KeywordAs,
+    "AND" => Token::KeywordAnd,
+    "OR" => Token::KeywordOr,
+
+    "identifier" => Token::Identifier(<String>),
+    "int" => Token::Integer(<i64>),
+    "string" => Token::String(<String>),
+
+    "(" => Token::LParen,
+    ")" => Token::RParen,
+    "," => Token::Comma,
+    "." => Token::Dot,
+    "*" => Token::Star,
+    "=" => Token::Eq,
+    ";" => Token::Semicolon,
+  }
+}
+
+pub Query: ast::Query = {
+  <s:SelectStmt> <_semi:Semicolon?> => ast::Query::Select(s)
+}
+
+SelectStmt: ast::Select = {
+  "SELECT" <items:SelectItems> "FROM" <t:TableRef> <w:WhereClause> => ast::Select { columns: items, from: t, r#where: w }
+}
+
+SelectItems: Vec<ast::SelectItem> = {
+  "*" => vec![ast::SelectItem::Wildcard],
+  <list:SelectItemList> => list,
+}
+
+SelectItemList: Vec<ast::SelectItem> = {
+  <head:SelectItem> <tail:("," <SelectItem>)*> => {
+    let mut v = vec![head];
+    for item in tail { v.push(item); }
+    v
+  }
+}
+
+SelectItem: ast::SelectItem = {
+  <id:Ident> => ast::SelectItem::Column { name: id, alias: None },
+  <id:Ident> "AS" <a:"identifier"> => ast::SelectItem::Column { name: id, alias: Some(a) },
+}
+
+Alias: Option<String> = {
+  "AS" <a:"identifier"> => Some(a),
+  => None,
+}
+
+TableRef: ast::TableRef = {
+  <name:Ident> => ast::TableRef { name, alias: None },
+  <name:Ident> "AS" <a:"identifier"> => ast::TableRef { name, alias: Some(a) },
+}
+
+WhereClause: Option<ast::Expr> = {
+  "WHERE" <e:Expr> => Some(e),
+  => None,
+}
+
+Expr: ast::Expr = {
+  #[precedence(level="1")]
+  <t:Term> => t,
+
+  #[precedence(level="2")] #[assoc(side="left")]
+  <l:Expr> "=" <r:Expr> => ast::Expr::BinaryOp { lhs: Box::new(l), op: ast::BinOp::Eq, rhs: Box::new(r) },
+
+  #[precedence(level="3")] #[assoc(side="left")]
+  <l:Expr> "AND" <r:Expr> => ast::Expr::BinaryOp { lhs: Box::new(l), op: ast::BinOp::And, rhs: Box::new(r) },
+
+  #[precedence(level="4")] #[assoc(side="left")]
+  <l:Expr> "OR" <r:Expr> => ast::Expr::BinaryOp { lhs: Box::new(l), op: ast::BinOp::Or, rhs: Box::new(r) },
+}
+
+Term: ast::Expr = {
+  <i:"int"> => ast::Expr::Integer(i),
+  <s:"string"> => ast::Expr::String(s),
+  <id:Ident> => ast::Expr::Ident(id),
+  "(" <e:Expr> ")" => e,
+}
+
+Ident: ast::Ident = {
+  <h:"identifier"> <t:("." <"identifier">)*> => {
+    let mut parts = vec![h];
+    for p in t { parts.push(p); }
+    ast::Ident(parts)
+  }
+}
+
+Semicolon: () = { ";" => () }
